@@ -54,8 +54,8 @@ The score measures how badly a video breaks the promise its title makes.
 
 ## Setup
 
-1. Get an API key from [Anthropic](https://console.anthropic.com/settings/keys), [OpenAI](https://platform.openai.com/api-keys), or [Google Gemini](https://aistudio.google.com/apikey) - or use any OpenAI-compatible endpoint (Ollama, OpenRouter, Groq, vLLM).
-2. `chrome://extensions` → **Developer mode** → **Load unpacked** → this folder.
+1. [Install from the Chrome Web Store](https://chromewebstore.google.com/detail/slopshield/phenlaclgbeidgdnacjlcjajljdkbhif) (or load this folder unpacked via `chrome://extensions` → **Developer mode** → **Load unpacked**).
+2. Get an API key from [Anthropic](https://console.anthropic.com/settings/keys), [OpenAI](https://platform.openai.com/api-keys), or [Google Gemini](https://aistudio.google.com/apikey) - or use any OpenAI-compatible endpoint (Ollama, OpenRouter, Groq, vLLM).
 3. Click the SlopShield icon, pick a provider, paste the key, **Save & test**.
 4. Reload youtube.com.
 
