@@ -77,6 +77,10 @@ content.css      overlay styling
 popup.html/.js   settings UI (provider, API key, model, pause switch)
 ```
 
+## License
+
+MIT - see [LICENSE](LICENSE).
+
 ## More examples
 
 <p>
