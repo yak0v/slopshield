@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SlopShield — a bullshit score for every YouTube video</title>
+<meta name="description" content="A Chrome extension that reads the transcript of every video on your YouTube homepage and scores it 0-100 for clickbait. Open source, bring-your-own-key, no server." />
+<meta property="og:title" content="SlopShield — a bullshit score for every YouTube video" />
+<meta property="og:description" content="AI reads the transcript so you don't have to. Every homepage video gets a 0-100 bullshit score." />
+<meta property="og:image" content="https://yak0v.github.io/slopshield/screenshots/bait-gates-ai.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+  :root{
+    --bg:#0f1216; --panel:#171b21; --line:#252c34; --ink:#e8ecf1; --dim:#9aa6b2;
+    --legit:#2e7d32; --bait:#c9860a; --slop:#c0392b; --accent:#4aa3ff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.55}
+  a{color:var(--accent)}
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px}
+  header{padding:72px 0 40px;text-align:center}
+  .logo{width:72px;height:72px;margin:0 auto 20px;display:block}
+  h1{font-size:clamp(28px,5vw,44px);margin:0 0 14px;letter-spacing:-.02em}
+  .tag{font-size:clamp(16px,2.5vw,20px);color:var(--dim);max-width:620px;margin:0 auto}
+  .cta{display:inline-flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:28px}
+  .btn{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:600;text-decoration:none}
+  .btn.primary{background:var(--accent);color:#04101f}
+  .btn.ghost{background:var(--panel);color:var(--ink);border:1px solid var(--line)}
+  section{padding:44px 0;border-top:1px solid var(--line)}
+  h2{font-size:24px;margin:0 0 20px;letter-spacing:-.01em}
+  .lede{color:var(--dim);max-width:640px;margin:-8px 0 26px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  figure{margin:0}
+  figure img{width:100%;border-radius:10px;display:block;border:1px solid var(--line)}
+  figcaption{font-size:13px;color:var(--dim);margin-top:8px}
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  td,th{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  .v{font-weight:700}
+  .legit{color:#66bb6a}.mild{color:#9ccc65}.meh{color:#d4b23a}.bait{color:#e0a021}.slop{color:#e05a4a}
+  .steps{padding-left:20px}.steps li{margin:8px 0}
+  code{background:var(--panel);padding:2px 6px;border-radius:5px;font-size:13px}
+  footer{padding:40px 0 60px;text-align:center;color:var(--dim);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <img class="logo" src="icons/icon128.png" alt="SlopShield" />
+  <h1>A bullshit score for every YouTube video</h1>
+  <p class="tag">SlopShield reads the transcript of every video on your homepage and scores 0&ndash;100 how far the title's promise is from what's actually said &mdash; right on the thumbnail.</p>
+  <div class="cta">
+    <a class="btn primary" href="https://chromewebstore.google.com/detail/slopshield/phenlaclgbeidgdnacjlcjajljdkbhif">Add to Chrome</a>
+    <a class="btn ghost" href="https://github.com/yak0v/slopshield">View source</a>
+  </div>
+</header>
+
+<section>
+  <h2>The same row on your homepage</h2>
+  <p class="lede">The recommendation algorithm put these next to each other. SlopShield just added the verdicts &mdash; judged from the transcript, not the thumbnail.</p>
+  <div class="grid">
+    <figure><img src="screenshots/bait-gates-ai.png" alt="Bill Gates video scored 78 BAIT"><figcaption>Bill Gates on AI &mdash; <b>78 BAIT.</b> "Vague, generic monologue with no specific data or plans."</figcaption></figure>
+    <figure><img src="screenshots/legit-tao.png" alt="Terence Tao podcast scored 10 LEGIT"><figcaption>Terence Tao on Lex Fridman &mdash; <b>10 LEGIT.</b> Three hours of actual mathematics.</figcaption></figure>
+    <figure><img src="screenshots/bait-supplements.png" alt="Supplement video scored 72 BAIT"><figcaption>"The #1 supplement mistake" &mdash; <b>72 BAIT.</b> Contradicts medical guidance throughout.</figcaption></figure>
+    <figure><img src="screenshots/legit-omega3.png" alt="Omega-3 analysis scored 15 LEGIT"><figcaption>45 omega-3 studies reviewed &mdash; <b>15 LEGIT.</b> Same topic, opposite verdict.</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2>The scale</h2>
+  <p class="lede">The score is how badly a video breaks the promise its title makes. Honest entertainment scores low &mdash; only broken promises raise the number.</p>
+  <table>
+    <tr><th>Score</th><th>Verdict</th><th></th></tr>
+    <tr><td>0&ndash;20</td><td class="v legit">LEGIT</td><td>does what the title says</td></tr>
+    <tr><td>21&ndash;40</td><td class="v mild">MILD</td><td>delivers, with some rambling</td></tr>
+    <tr><td>41&ndash;60</td><td class="v meh">MEH</td><td>real content buried in padding</td></tr>
+    <tr><td>61&ndash;80</td><td class="v bait">BAIT</td><td>promises a lot more than it delivers</td></tr>
+    <tr><td>81&ndash;100</td><td class="v slop">SLOP</td><td>filler stretched out for watch time</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>More verdicts</h2>
+  <div class="grid">
+    <figure><img src="screenshots/bait-reading.png" alt="21 benefits of reading, 75 BAIT"><figcaption>"21 mind-blowing benefits of reading" &mdash; <b>75 BAIT.</b></figcaption></figure>
+    <figure><img src="screenshots/legit-3b1b.png" alt="3Blue1Brown, 5 LEGIT"><figcaption>3Blue1Brown on nonsquare matrices &mdash; <b>5 LEGIT.</b></figcaption></figure>
+    <figure><img src="screenshots/bait-pseudotest.png" alt="Creative or analytical, 72 BAIT"><figcaption>"Creative or analytical? Find out in 5 seconds" &mdash; <b>72 BAIT.</b></figcaption></figure>
+    <figure><img src="screenshots/legit-salmon.png" alt="Chef cooks salmon, 8 LEGIT"><figcaption>A chef cooking salmon, exactly as titled &mdash; <b>8 LEGIT.</b></figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2>How it works</h2>
+  <ol class="steps">
+    <li>Your browser pulls each video's transcript from YouTube's own player API.</li>
+    <li>It's scored by the AI provider you choose &mdash; Anthropic, OpenAI, Gemini, or a local <code>ollama</code> &mdash; with <b>your own API key</b>.</li>
+    <li>The verdict and a one-line summary render on the tile. Scores are cached 30 days.</li>
+  </ol>
+  <p class="lede" style="margin-top:20px">No server. Nothing is collected. The transcript goes from your browser to your provider and nowhere else &mdash; against a local model it never leaves your machine at all. Open source, MIT licensed.</p>
+  <div class="cta" style="justify-content:flex-start">
+    <a class="btn primary" href="https://chromewebstore.google.com/detail/slopshield/phenlaclgbeidgdnacjlcjajljdkbhif">Add to Chrome</a>
+    <a class="btn ghost" href="https://github.com/yak0v/slopshield">GitHub</a>
+  </div>
+</section>
+
+<footer>
+  Ninety percent of everything is crap. SlopShield tells you which ninety percent.<br>
+  <a href="https://github.com/yak0v/slopshield">github.com/yak0v/slopshield</a>
+</footer>
+
+</div>
+</body>
+</html>
